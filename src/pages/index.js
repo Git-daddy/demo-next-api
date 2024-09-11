@@ -1,7 +1,9 @@
+import styles from "@/styles/Home.module.css";
+import axios from 'axios';
+import localFont from "next/font/local";
 import Head from "next/head";
 import Image from "next/image";
-import localFont from "next/font/local";
-import styles from "@/styles/Home.module.css";
+import { useEffect } from 'react';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -15,6 +17,24 @@ const geistMono = localFont({
 });
 
 export default function Home() {
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get('https://api.bsx.exchange/products', {
+          headers: {
+            'Access-Control-Allow-Credentials': '*',
+          },
+        });
+        const data = response.data;
+        console.log(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
+
+    fetchData();
+  }, []);
+
   return (
     <>
       <Head>
