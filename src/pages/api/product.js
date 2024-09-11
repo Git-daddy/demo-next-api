@@ -7,6 +7,8 @@ export default async function handler(req, res) {
             res.status(200).json(response.data);
         } catch (error) {
             console.log(error);
+            console.log('REQUEST-----------------:', req)
+            console.log('RESPONE-----------------:', res)
             res.status(500).json({ error: 'Failed to fetch data' });
         }
     } else {
